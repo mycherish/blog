@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 登录界面的展示
+Route::get('auth/{service}', 'Auth\SocialiteLoginController@redirectToProvider')->name('socialite_login_form');
+// 登录回调的处理
+Route::get('auth/{service}/callback', 'Auth\SocialiteLoginController@handleProviderCallback')->name('socialite_login');

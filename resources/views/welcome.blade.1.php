@@ -10,10 +10,6 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <script src="/js/jquery-3.4.1.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
-
         <!-- Styles -->
         <style>
             html, body {
@@ -82,14 +78,16 @@
             @endif
 
             <div class="content">
-                <div class="form-group">
-                    <div class="col-md-8 col-md-offset-4">
-                        <button type="submit" class="btn btn-primary">
-                            登录
-                        </button>
+                <div class="title m-b-md">
+                    Laravel
+                </div>
 
-                        <a class="btn btn-link" href="{{route('socialite_login_form','qq')}}"><i class="fa fa-qq"></i> qq登录</a>
-                    </div>
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
