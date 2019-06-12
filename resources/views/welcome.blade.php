@@ -2,15 +2,9 @@
 <html lang="en" >
 
 <head>
-    <meta charset="UTF-8">
-    <title>倚南</title>
-  
-    <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
-    <script  src="{{URL::asset('js/jquery.js')}}"></script>
-    <script src="{{URL::asset('js/index.js')}}"></script>
+    @include('home.common.style.style')
 
 </head>
-
 <body>
 
 <h1>倚南窗以寄傲，审容膝之易安</h1>
