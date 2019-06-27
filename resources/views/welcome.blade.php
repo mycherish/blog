@@ -8,6 +8,12 @@
 <body>
 
 <h1>倚南窗以寄傲，审容膝之易安</h1>
+{{-- HTML 文本编辑器 --}}
+{{-- <textarea id="editor_id" name="content" style="width:700px;height:300px;">
+    HTML内容
+</textarea>
+
+@include('kindeditor::editor',['editor'=>'editor_id']) --}}
 <div class="css_top_container">
 	<div class="outside_number left_hour_css_clock">
 		<div id="hour_ones_top" class="zero_top3"></div>
