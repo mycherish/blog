@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/phpinfo', function () {
-    return view('phpinfo');
+    return view('phpinfo'); 
 });
+
+
 
 // 前台首页
 Route::get('/login', 'Home\Auth\LoginController@index');
