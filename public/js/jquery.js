@@ -1,49 +1,49 @@
-/ *！
+/*!
  * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
- *包括Sizzle.js
+ * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- *版权所有JS基金会和其他贡献者
- *根据MIT许可证发布
+ * Copyright JS Foundation and other contributors
+ * Released under the MIT license
  * https://jquery.org/license
  *
- *日期：2019-05-01T21：04Z
- * /
-（功能（全球，工厂）{
+ * Date: 2019-05-01T21:04Z
+ */
+( function( global, factory ) {
 
-	“严格使用”;
+	"use strict";
 
-	if（typeof module ===“object”&& typeof module.exports ===“object”）{
+	if ( typeof module === "object" && typeof module.exports === "object" ) {
 
-		//适用于CommonJS和类似CommonJS的环境，其中有一个正确的“窗口”
-		//存在，执行工厂并获取jQuery。
-		//对于没有带“文档”的“窗口”的环境
-		//（例如Node.js），将工厂公开为module.exports。
-		//这突出了创建一个真正的“窗口”的需要。
-		//例如var jQuery = require（“jquery”）（window）;
-		//有关详细信息，请参阅＃14549票。
-		module.exports = global.document？
-			工厂（全球，真实）：
-			function（w）{
-				if（！w.document）{
-					抛出新错误（“jQuery需要一个带文档的窗口”）;
+		// For CommonJS and CommonJS-like environments where a proper `window`
+		// is present, execute the factory and get jQuery.
+		// For environments that do not have a `window` with a `document`
+		// (such as Node.js), expose a factory as module.exports.
+		// This accentuates the need for the creation of a real `window`.
+		// e.g. var jQuery = require("jquery")(window);
+		// See ticket #14549 for more info.
+		module.exports = global.document ?
+			factory( global, true ) :
+			function( w ) {
+				if ( !w.document ) {
+					throw new Error( "jQuery requires a window with a document" );
 				}
-				返厂（w）;
+				return factory( w );
 			};
 	} else {
-		工厂（全球）;
+		factory( global );
 	}
 
-//如果尚未定义窗口，请传递此项
-}）（typeof window！==“undefined”？window：this，function（window，noGlobal）{
+// Pass this if window is not defined yet
+} )( typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
 
-// Edge <= 12  -  13 +，Firefox <= 18  -  45 +，IE 10  -  11，Safari 5.1  -  9 +，iOS 6  -  9.1
-//当非严格代码（例如，ASP.NET 4.5）访问严格模式时抛出异常
-// arguments.callee.caller（trac-13335）。但是从jQuery 3.0（2016）开始，严格模式应该是常见的
-//足以让所有这些尝试都在try块中得到保护。
-“严格使用”;
+// Edge <= 12 - 13+, Firefox <=18 - 45+, IE 10 - 11, Safari 5.1 - 9+, iOS 6 - 9.1
+// throw exceptions when non-strict code (e.g., ASP.NET 4.5) accesses strict mode
+// arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), strict mode should be common
+// enough that all such attempts are guarded in a try block.
+"use strict";
 
 var arr = [];
 
@@ -67,193 +67,193 @@ var hasOwn = class2type.hasOwnProperty;
 
 var fnToString = hasOwn.toString;
 
-var ObjectFunctionString = fnToString.call（Object）;
+var ObjectFunctionString = fnToString.call( Object );
 
 var support = {};
 
-var isFunction = function isFunction（obj）{
+var isFunction = function isFunction( obj ) {
 
-      //支持：Chrome <= 57，Firefox <= 52
-      //在某些浏览器中，typeof为HTML <object>元素返回“function”
-      //（即`typeof document.createElement（“object”）===“function”`）。
-      //我们不想将* any * DOM节点归类为函数。
-      return typeof obj ===“function”&& typeof obj.nodeType！==“number”;
+      // Support: Chrome <=57, Firefox <=52
+      // In some browsers, typeof returns "function" for HTML <object> elements
+      // (i.e., `typeof document.createElement( "object" ) === "function"`).
+      // We don't want to classify *any* DOM node as a function.
+      return typeof obj === "function" && typeof obj.nodeType !== "number";
   };
 
 
-var isWindow = function isWindow（obj）{
-		return obj！= null && obj === obj.window;
+var isWindow = function isWindow( obj ) {
+		return obj != null && obj === obj.window;
 	};
 
 
 
 
 	var preservedScriptAttributes = {
-		类型：true，
-		src：是的，
-		nonce：是的，
-		noModule：是的
+		type: true,
+		src: true,
+		nonce: true,
+		noModule: true
 	};
 
-	function DOMEval（code，node，doc）{
-		doc = doc || 文献;
+	function DOMEval( code, node, doc ) {
+		doc = doc || document;
 
-		var i，val，
-			script = doc.createElement（“script”）;
+		var i, val,
+			script = doc.createElement( "script" );
 
 		script.text = code;
-		if（node）{
-			for（i in preservedScriptAttributes）{
+		if ( node ) {
+			for ( i in preservedScriptAttributes ) {
 
-				//支持：Firefox 64 +，Edge 18+
-				//某些浏览器不支持脚本上的“nonce”属性。
-				//另一方面，仅使用`getAttribute`是不够的
-				//每当`nonce`属性重置为空字符串
-				//变为浏览上下文连接。
-				//请参阅https://github.com/whatwg/html/issues/2369
-				//请参阅https://html.spec.whatwg.org/#nonce-attributes
-				//添加了`node.getAttribute`检查
-				//`jQuery.globalEval`，以便伪造一个包含nonce的节点
-				//通过一个对象。
-				val = node [i] || node.getAttribute && node.getAttribute（i）;
-				if（val）{
-					script.setAttribute（i，val）;
+				// Support: Firefox 64+, Edge 18+
+				// Some browsers don't support the "nonce" property on scripts.
+				// On the other hand, just using `getAttribute` is not enough as
+				// the `nonce` attribute is reset to an empty string whenever it
+				// becomes browsing-context connected.
+				// See https://github.com/whatwg/html/issues/2369
+				// See https://html.spec.whatwg.org/#nonce-attributes
+				// The `node.getAttribute` check was added for the sake of
+				// `jQuery.globalEval` so that it can fake a nonce-containing node
+				// via an object.
+				val = node[ i ] || node.getAttribute && node.getAttribute( i );
+				if ( val ) {
+					script.setAttribute( i, val );
 				}
 			}
 		}
-		doc.head.appendChild（script）.parentNode.removeChild（script）;
+		doc.head.appendChild( script ).parentNode.removeChild( script );
 	}
 
 
-function toType（obj）{
-	if（obj == null）{
-		return obj +“”;
+function toType( obj ) {
+	if ( obj == null ) {
+		return obj + "";
 	}
 
-	//支持：Android <= 2.3（功能RegExp）
-	return typeof obj ===“object”|| typeof obj ===“功能”？
-		class2type [toString.call（obj）] || “对象”：
-		对象类型;
+	// Support: Android <=2.3 only (functionish RegExp)
+	return typeof obj === "object" || typeof obj === "function" ?
+		class2type[ toString.call( obj ) ] || "object" :
+		typeof obj;
 }
-/ *全球符号* /
-//在.eslintrc.json中定义此全局会产生使用全局的危险
-//在另一个地方无人看守，为这个模块定义全局似乎更安全
+/* global Symbol */
+// Defining this global in .eslintrc.json would create a danger of using the global
+// unguarded in another place, it seems safer to define global only for this module
 
 
 
-VAR
-	version =“3.4.1”，
+var
+	version = "3.4.1",
 
-	//定义jQuery的本地副本
-	jQuery = function（selector，context）{
+	// Define a local copy of jQuery
+	jQuery = function( selector, context ) {
 
-		// jQuery对象实际上只是init构造函数'enhanced'
-		//如果调用了jQuery，则需要init（如果不包含则只允许抛出错误）
-		返回新的jQuery.fn.init（selector，context）;
-	}，
+		// The jQuery object is actually just the init constructor 'enhanced'
+		// Need init if jQuery is called (just allow error to be thrown if not included)
+		return new jQuery.fn.init( selector, context );
+	},
 
-	//支持：Android <= 4.0
-	//确保我们修剪BOM和NBSP
-	rtrim = / ^ [\ s \ uFEFF \ xA0] + | [\ s \ uFEFF \ xA0] + $ / g;
+	// Support: Android <=4.0 only
+	// Make sure we trim BOM and NBSP
+	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 
 jQuery.fn = jQuery.prototype = {
 
-	//正在使用的jQuery的当前版本
-	jquery：版本，
+	// The current version of jQuery being used
+	jquery: version,
 
-	构造函数：jQuery，
+	constructor: jQuery,
 
-	// jQuery对象的默认长度为0
-	长度：0，
+	// The default length of a jQuery object is 0
+	length: 0,
 
-	toArray：function（）{
-		return slice.call（this）;
-	}，
+	toArray: function() {
+		return slice.call( this );
+	},
 
-	//获取匹配元素集OR中的第N个元素
-	//将整个匹配的元素集作为干净数组
-	get：function（num）{
+	// Get the Nth element in the matched element set OR
+	// Get the whole matched element set as a clean array
+	get: function( num ) {
 
-		//返回干净数组中的所有元素
-		if（num == null）{
-			return slice.call（this）;
+		// Return all the elements in a clean array
+		if ( num == null ) {
+			return slice.call( this );
 		}
 
-		//只返回集合中的一个元素
-		返回num <0？这[num + this.length]：这个[num];
-	}，
+		// Return just the one element from the set
+		return num < 0 ? this[ num + this.length ] : this[ num ];
+	},
 
-	//获取一系列元素并将其推入堆栈
-	//（返回新的匹配元素集）
-	pushStack：function（elems）{
+	// Take an array of elements and push it onto the stack
+	// (returning the new matched element set)
+	pushStack: function( elems ) {
 
-		//构建一个新的jQuery匹配元素集
-		var ret = jQuery.merge（this.constructor（），elems）;
+		// Build a new jQuery matched element set
+		var ret = jQuery.merge( this.constructor(), elems );
 
-		//将旧对象添加到堆栈中（作为参考）
+		// Add the old object onto the stack (as a reference)
 		ret.prevObject = this;
 
-		//返回新形成的元素集
-		返回;
-	}，
+		// Return the newly-formed element set
+		return ret;
+	},
 
-	//对匹配集中的每个元素执行回调。
-	each：function（callback）{
-		return jQuery.each（this，callback）;
-	}，
+	// Execute a callback for every element in the matched set.
+	each: function( callback ) {
+		return jQuery.each( this, callback );
+	},
 
-	map：function（callback）{
-		return this.pushStack（jQuery.map（this，function（elem，i）{
-			return callback.call（elem，i，elem）;
-		}）;;
-	}，
+	map: function( callback ) {
+		return this.pushStack( jQuery.map( this, function( elem, i ) {
+			return callback.call( elem, i, elem );
+		} ) );
+	},
 
-	slice：function（）{
-		return this.pushStack（slice.apply（this，arguments））;
-	}，
+	slice: function() {
+		return this.pushStack( slice.apply( this, arguments ) );
+	},
 
-	第一名：function（）{
-		return this.eq（0）;
-	}，
+	first: function() {
+		return this.eq( 0 );
+	},
 
-	last：function（）{
-		return this.eq（-1）;
-	}，
+	last: function() {
+		return this.eq( -1 );
+	},
 
-	eq：function（i）{
-		var len = this.length，
-			j = + i +（i <0？len：0）;
-		return this.pushStack（j> = 0 && j <len？[this [j]]：[]）;
-	}，
+	eq: function( i ) {
+		var len = this.length,
+			j = +i + ( i < 0 ? len : 0 );
+		return this.pushStack( j >= 0 && j < len ? [ this[ j ] ] : [] );
+	},
 
-	结束：function（）{
-		返回this.prevObject || this.constructor（）;
-	}，
+	end: function() {
+		return this.prevObject || this.constructor();
+	},
 
-	// 仅限内部使用。
-	//表现得像一个Array的方法，而不是像jQuery方法。
-	推推，
-	sort：arr.sort，
-	拼接：arr.splice
+	// For internal use only.
+	// Behaves like an Array's method, not like a jQuery method.
+	push: push,
+	sort: arr.sort,
+	splice: arr.splice
 };
 
-jQuery.extend = jQuery.fn.extend = function（）{
-	var options，name，src，copy，copyIsArray，clone，
-		target = arguments [0] || {}，
-		i = 1，
-		length = arguments.length，
+jQuery.extend = jQuery.fn.extend = function() {
+	var options, name, src, copy, copyIsArray, clone,
+		target = arguments[ 0 ] || {},
+		i = 1,
+		length = arguments.length,
 		deep = false;
 
-	//处理深层复制情况
-	if（typeof target ===“boolean”）{
+	// Handle a deep copy situation
+	if ( typeof target === "boolean" ) {
 		deep = target;
 
-		//跳过布尔值和目标
-		target = arguments [i] || {};
-		我++;
+		// Skip the boolean and the target
+		target = arguments[ i ] || {};
+		i++;
 	}
 
-	//当目标是字符串或其他东西时处理大小写（可能在深层副本中）
+	// Handle case when target is a string or something (possible in deep copy)
 	if ( typeof target !== "object" && !isFunction( target ) ) {
 		target = {};
 	}
