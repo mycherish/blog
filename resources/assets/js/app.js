@@ -23,10 +23,12 @@ import router from './router/index.js';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('ExampleComponent', require('./components/ExampleComponent.vue'));
+// Vue.component('ExampleComponent', require('./components/ExampleComponent.vue'));
+// Vue.component('navbar', require('./components/Navbar.vue'));
 
 const app = new Vue({
     el: '#app',
     router,
     render:h => h(App)
 });
+

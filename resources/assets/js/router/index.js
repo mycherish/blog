@@ -8,7 +8,7 @@ export default new VueRouter({
         {
             name:"index",
             path:'/',
-            component: resolve =>void(require(['../components/ExampleComponent.vue'], resolve))
+            component: resolve =>void(require(['../components/Navbar.vue'], resolve))
         },
         {
             name:"test",
