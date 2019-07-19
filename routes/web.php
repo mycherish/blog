@@ -20,8 +20,9 @@ Route::get('/phpinfo', function () {
     return view('phpinfo'); 
 });
 
-// 前台首页
+// 前台登录
 Route::get('/login', 'Home\Auth\LoginController@index');
+Route::get('/mined', 'Home\Auth\LoginController@callback');
 // 登录界面的展示
 // Route::get('auth/{service}', 'Auth\SocialiteLoginController@redirectToProvider')->name('socialite_login_form');
 // 登录回调的处理
