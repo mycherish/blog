@@ -22,7 +22,8 @@ Route::get('/phpinfo', function () {
 
 // 前台登录
 Route::get('/login', 'Home\Auth\LoginController@index');
-Route::get('/mined', 'Home\Auth\LoginController@callback');
+Route::get('/qq', 'Home\Auth\LoginController@qq');
+
 // 登录界面的展示
 // Route::get('auth/{service}', 'Auth\SocialiteLoginController@redirectToProvider')->name('socialite_login_form');
 // 登录回调的处理

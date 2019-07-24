@@ -115,6 +115,8 @@
                         </div>
                         <div class="footer text-center">
                             <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">登录</a>
+                            
+                            <a href="{{ app('sociate')->driver('qq')->getLoginUrl(url()->full()) }} ><i class="el-icon-edit"></i>QQ</a>
                         </div>
                         <div class="pull-left">
                             <h6>

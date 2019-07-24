@@ -162,6 +162,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Chenhua\Kindeditor\KindeditorServiceProvider::class,
+        Huoshaotuzi\Sociate\SociateServiceProvider::class,
 
     ],
 

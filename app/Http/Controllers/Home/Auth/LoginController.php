@@ -4,14 +4,14 @@
  * @Author: 徐卫东
  * @Date: 2019-06-24 16:03:24
  * @LastEditors: 徐卫东
- * @LastEditTime: 2019-07-19 09:35:39
+ * @LastEditTime: 2019-07-24 18:29:52
  */
 
 namespace App\Http\Controllers\Home\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Huoshaotuzi\Sociate\Sociate;
 class LoginController extends Controller
 {
     /**
@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('home.auth.login');
+        return view('home.auth.login',);
     }
     /**
      * @discription: 登录回调
@@ -30,8 +30,12 @@ class LoginController extends Controller
      * @return: 
      * @Author: 徐卫东
      */
-    public function callback()
+    public function qq()
     {
-        return view('welcome');
+        $sociate = new Sociate();
+        $driver = $sociate->driver('qq');
+        $accessToken = $driver->getAccessToken();
+        $user = $driver->getUserInfo($accessToken);
+        dd($user);
     }
 }
