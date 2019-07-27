@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('home.auth.login',);
+        return view('home.auth.login');
     }
     /**
      * @discription: 登录回调
